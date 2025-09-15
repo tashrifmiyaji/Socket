@@ -21,7 +21,8 @@ io.on("connection", (socket) => {
 			displayMessage = message[index];
 			index = (index + 1) % message.length;
 
-			socket.send(displayMessage);
+			// socket.send(displayMessage);
+			socket.emit("myEvent", displayMessage)
 		}, 2000);
 	})();
 
