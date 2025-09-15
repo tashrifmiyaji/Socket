@@ -26,10 +26,16 @@ io.on("connection", (socket) => {
 	// 	}, 2000);
 	// })();
 
-	socket.on("message", (msg)=>{
-		console.log(msg);
+	// socket.on("message", (msg)=>{
+	// 	console.log(msg);
 		
+	// })
+
+	// custom event
+	socket.on("myMsgEvent", (msg)=>{
+		console.log(msg);
 	})
+
 
 	socket.on("disconnect", () => {
 		console.log("user disconnected" + ", usr id :" + socket.id);

@@ -46,7 +46,10 @@
 				e.preventDefault();
 				let nameInput = document.getElementById("name");
 				let name = nameInput.value;
-				socket.send(name);
+				// socket.send(name);
+                
+                // custom event
+                socket.emit("myMsgEvent", name)
 				nameInput.value = "";
 			});
 		</script>
