@@ -10,14 +10,25 @@ app.get("/", (req, res) => {
 	res.sendFile(__dirname + "/index.html");
 });
 
-io.on("connection", (socket)=>{
+io.on("connection", (socket) => {
 	console.log("new user connected" + ", usr id :" + socket.id);
-	
-	socket.on("disconnect", ()=>{
-		console.log("user disconnected"+ ", usr id :" + socket.id);
-		
-	})
-})
+
+	(() => {
+		const message = ["hello everyone", "hello tashrif", "hello clint"];
+		let displayMessage = null;
+		let index = 0;
+		setInterval(() => {
+			displayMessage = message[index];
+			index = (index + 1) % message.length;
+
+			socket.send(displayMessage);
+		}, 2000);
+	})();
+
+	socket.on("disconnect", () => {
+		console.log("user disconnected" + ", usr id :" + socket.id);
+	});
+});
 
 expressServer.listen(3000, () => {
 	console.log("server listening on port 3000");
