@@ -5,26 +5,50 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Socket-App-1</title>
 	</head>
-<body>
-    <h1>Hello</h1>
-    <ul id="messages"></ul>
+	<body>
+		<!-- <h1>Hello</h1>
+    <ul id="messages"></ul> -->
+		<div
+			style="
+				width: 100vw;
+				height: 100vh;
+				display: flex;
+				justify-content: center;
+			"
+		>
+			<form id="myForm">
+				<input type="text" id="name" placeholder="Enter Your Name" />
+				<button>Send</button>
+			</form>
+		</div>
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-        let socket = io()
-        let messages = document.getElementById("messages")
+		<script src="/socket.io/socket.io.js"></script>
+		<script>
+			// let socket = io()
+			// let messages = document.getElementById("messages")
 
-        // socket.on("message", (data)=>{
-        //     let li = document.createElement("li")
-        //     li.textContent = data
-        //     messages.appendChild(li)
-        // })
-        socket.on("myEvent", (data)=>{
-            let li = document.createElement("li")
-            li.textContent = data
-            messages.appendChild(li)
-        })
-    </script>
-</body>
+			// socket.on("message", (data)=>{
+			//     let li = document.createElement("li")
+			//     li.textContent = data
+			//     messages.appendChild(li)
+			// })
 
+			// custom event
+			// socket.on("myEvent", (data)=>{
+			//     let li = document.createElement("li")
+			//     li.textContent = data
+			//     messages.appendChild(li)
+			// })
+
+			let socket = io();
+			const form = document.getElementById("myForm");
+			form.addEventListener("submit", (e) => {
+				e.preventDefault();
+				let nameInput = document.getElementById("name");
+				let name = nameInput.value;
+				socket.send(name);
+				nameInput.value = "";
+			});
+		</script>
+	</body>
 </html>
