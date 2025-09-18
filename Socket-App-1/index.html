@@ -6,9 +6,9 @@
 		<title>Socket-App-1</title>
 	</head>
 	<body>
-		<!-- <h1>Hello</h1>
-    <ul id="messages"></ul> -->
-		<div
+		<!-- <h1>Hello</h1> -->
+		<ul id="messages"></ul>
+		<!-- <div
 			style="
 				width: 100vw;
 				height: 100vh;
@@ -20,7 +20,7 @@
 				<input type="text" id="name" placeholder="Enter Your Name" />
 				<button>Send</button>
 			</form>
-		</div>
+		</div> -->
 
 		<script src="/socket.io/socket.io.js"></script>
 		<script>
@@ -41,17 +41,26 @@
 			// })
 
 			let socket = io();
-			const form = document.getElementById("myForm");
-			form.addEventListener("submit", (e) => {
-				e.preventDefault();
-				let nameInput = document.getElementById("name");
-				let name = nameInput.value;
-				// socket.send(name);
-                
-                // custom event
-                socket.emit("myMsgEvent", name)
-				nameInput.value = "";
+			// const form = document.getElementById("myForm");
+			// form.addEventListener("submit", (e) => {
+			// 	e.preventDefault();
+			// 	let nameInput = document.getElementById("name");
+			// 	let name = nameInput.value;
+			// 	// socket.send(name);
+
+			//     // custom event
+			//     socket.emit("myMsgEvent", name)
+			// 	nameInput.value = "";
+			// });
+
+
+			let messages = document.getElementById("messages")
+			socket.on("myBroadCast", (data) => {
+				let li = document.createElement("li");
+				li.textContent = data;
+				messages.appendChild(li);
 			});
+			
 		</script>
 	</body>
 </html>

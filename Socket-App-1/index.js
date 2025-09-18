@@ -31,10 +31,13 @@ io.on("connection", (socket) => {
 		
 	// })
 
-	// custom event
-	socket.on("myMsgEvent", (msg)=>{
-		console.log(msg);
-	})
+	// // custom event
+	// socket.on("myMsgEvent", (msg)=>{
+	// 	console.log(msg);
+	// })
+
+	// broad cast
+	io.sockets.emit("myBroadCast", "hello everyone!")
 
 
 	socket.on("disconnect", () => {
