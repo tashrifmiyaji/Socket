@@ -53,7 +53,6 @@
 			// 	nameInput.value = "";
 			// });
 
-
 			// let messages = document.getElementById("messages")
 			// socket.on("myBroadCast", (data) => {
 			// 	let li = document.createElement("li");
@@ -62,14 +61,31 @@
 			// });
 
 			// name space
-			let socket = io("/buy");
-			let messages = document.getElementById("messages")
-			socket.on("myEvent", (data) => {
+			// let socket = io("/buy");
+			// let messages = document.getElementById("messages")
+			// socket.on("myEvent", (data) => {
+			// 	let li = document.createElement("li");
+			// 	li.textContent = data;
+			// 	messages.appendChild(li);
+			// });
+
+			// room
+			let socket = io();
+			let messages = document.getElementById("messages");
+
+			// cooking room
+			socket.on("cooking", (data) => {
 				let li = document.createElement("li");
 				li.textContent = data;
 				messages.appendChild(li);
-			});
-			
+			})
+
+			// call room
+			socket.on("callForFun", (data) => {
+				let li = document.createElement("li");
+				li.textContent = data;
+				messages.appendChild(li);
+			})
 		</script>
 	</body>
 </html>

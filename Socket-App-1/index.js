@@ -44,15 +44,37 @@ app.get("/", (req, res) => {
 // 	});
 // });
 
-// name space
-const sellNsp = io.of("/sell");
-sellNsp.on("connect", (socket) => {
-	socket.emit("myEvent", "lets sell our products.");
-});
+// // name space
+// const sellNsp = io.of("/sell");
+// sellNsp.on("connect", (socket) => {
+// 	socket.emit("myEvent", "lets sell our products.");
+// });
 
-const buyNsp = io.of("/buy");
-buyNsp.on("connect", (socket) => {
-	socket.emit("myEvent", "lets buy products");
+// const buyNsp = io.of("/buy");
+// buyNsp.on("connect", (socket) => {
+// 	socket.emit("myEvent", "lets buy products");
+// });
+
+io.on("connect", (socket) => {
+	socket.join("kitchen-room");
+	const kitchenRoomMember = io.sockets.adapter.rooms.get("kitchen-room").size;
+	io.sockets
+		.in("kitchen-room")
+		.emit(
+			"cooking",
+			"let's cook fried rice."+
+			"join in kitchen room :" + kitchenRoomMember + " members"
+		);
+
+	socket.join("call-room");
+	const callRoomMember = io.sockets.adapter.rooms.get("call-room").size;
+	io.sockets
+		.in("call-room")
+		.emit(
+			"callForFun",
+			"let's have fun." +
+			"join in call room :" + callRoomMember + " members"
+		);
 });
 
 expressServer.listen(3000, () => {
