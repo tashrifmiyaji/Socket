@@ -40,7 +40,7 @@
 			//     messages.appendChild(li)
 			// })
 
-			let socket = io();
+			// let socket = io();
 			// const form = document.getElementById("myForm");
 			// form.addEventListener("submit", (e) => {
 			// 	e.preventDefault();
@@ -54,8 +54,17 @@
 			// });
 
 
+			// let messages = document.getElementById("messages")
+			// socket.on("myBroadCast", (data) => {
+			// 	let li = document.createElement("li");
+			// 	li.textContent = data;
+			// 	messages.appendChild(li);
+			// });
+
+			// name space
+			let socket = io("/buy");
 			let messages = document.getElementById("messages")
-			socket.on("myBroadCast", (data) => {
+			socket.on("myEvent", (data) => {
 				let li = document.createElement("li");
 				li.textContent = data;
 				messages.appendChild(li);
